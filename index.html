@@ -1,0 +1,174 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="style.css">
+      <script src="https://cdn.tailwindcss.com"></script>
+      <title>Document</title>
+    </head>
+    <body>
+      <div class="container mx-auto px-4">
+    
+        <!-- horizontal navbar -->
+        <nav class="bg-blue-700 py-4">
+          <div class="flex items-center justify-between">
+            <ul class="flex space-x-4 text-white">
+              <li><a href="#" class="hover:underline">Home</a></li>
+              <li class="relative group">
+                <a href="#" class="hover:underline">Products</a>
+                <div class="absolute left-0 mt-2 w-48 bg-blue-500 border rounded-md shadow-lg opacity-0 group-hover:opacity-100 transition-opacity">
+                  <button onclick="filterItems('all')" class="block w-full text-left px-4 py-2 hover:bg-gray-100">All</button>
+                  <button onclick="filterItems('2')" class="block w-full text-left px-4 py-2 hover:bg-gray-100">2 Stars & Above</button>
+                  <button onclick="filterItems('3')" class="block w-full text-left px-4 py-2 hover:bg-gray-100">3 Stars & Above</button>
+                  <button onclick="filterItems('4')" class="block w-full text-left px-4 py-2 hover:bg-gray-100">4 Stars & Above</button>
+                  <button onclick="filterItems('5')" class="block w-full text-left px-4 py-2 hover:bg-gray-100">5 Stars Only</button>
+                </div>
+              </li>
+    
+              <li class="relative group">
+                <a href="#" class="hover:underline">Categories</a>
+                <div class="absolute left-0 mt-2 w-48 bg-blue-500 border rounded-md shadow-lg opacity-0 group-hover:opacity-100 transition-opacity">
+                  <button onclick="filterByCategory('electronics')" class="block w-full text-left px-4 py-2 hover:bg-gray-100">Electronics</button>
+                  <button onclick="filterByCategory('furniture')" class="block w-full text-left px-4 py-2 hover:bg-gray-100">Furniture</button>
+                  <button onclick="filterByCategory('clothing')" class="block w-full text-left px-4 py-2 hover:bg-gray-100">Clothing</button>
+                  <button onclick="filterByCategory('beauty')" class="block w-full text-left px-4 py-2 hover:bg-gray-100">Beauty</button>
+                  <button onclick="filterByCategory('others')" class="block w-full text-left px-4 py-2 hover:bg-gray-100">Others</button>
+                </div>
+              </li>
+              <li><a href="#" class="hover:underline">About</a></li>
+              <li><a href="#" class="hover:underline">Contact</a></li>
+            </ul>
+          </div>
+        </nav>
+        <nav class="bg-gray-200 py-2">
+          <div class="container mx-auto flex justify-between items-center">
+            <form class="flex space-x-2">
+              <input class="form-input px-4 py-2 border rounded-md" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600" type="submit">Search</button>
+            </form>
+          </div>
+        </nav>
+    
+        <!-- Price Filter Controls -->
+        <div class="my-4 p-4 bg-white border rounded-md shadow-md">
+          <label for="min-price" class="block text-gray-700">Min Price:</label>
+          <input type="number" id="min-price" placeholder="0" value="0" class="border rounded-md px-2 py-1 w-full">
+    
+          <label for="max-price" class="block text-gray-700 mt-2">Max Price:</label>
+          <input type="number" id="max-price" placeholder="1000" value="1000" class="border rounded-md px-2 py-1 w-full">
+    
+          <button onclick="applyPriceFilter()" class="mt-2 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Apply Filter</button>
+        </div>
+    
+        <div class="flex flex-wrap justify-center gap-4">
+          <!-- cards -->
+          <div class="card border rounded-md overflow-hidden shadow-md" style="width: 18rem;" data-rating="4">
+            <img src="box1_image.jpg" height="230px" class="w-full object-cover" data-category="clothing" class="card-image">
+            <div class="p-4">
+              <h5 class="text-lg font-semibold">Shirts & Jeans</h5>
+              <p>Rating: <span id="Rating">4.2</span>/5</p>
+              <p class="text-gray-700">$199.99</p>
+              <a href="#" class="mt-2 inline-block bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Add to Cart</a>
+            </div>
+          </div>
+    
+          <div class="card border rounded-md overflow-hidden shadow-md" style="width: 18rem;" data-rating="5" data-category="others">
+            <img src="box2_image.jpg" class="w-full object-cover"  class="card-image">
+            <div class="p-4">
+              <h5 class="text-lg font-semibold">Daily Needs</h5>
+              <p>Rating: <span id="Rating">5</span>/5</p>
+              <p class="text-gray-700">$399.99</p>
+              <a href="#" class="mt-2 inline-block bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Add to Cart</a>
+            </div>
+          </div>
+
+          <div class="card border rounded-md overflow-hidden shadow-md" style="width: 18rem;" data-rating="3" data-category="furniture">
+            <img src="box3_image.jpg" class="w-full object-cover"  class="card-image">
+            <div class="p-4">
+              <h5 class="text-lg font-semibold">Furniture</h5>
+              <p>Rating: <span id="Rating">3</span>/5</p>
+              <p class="text-gray-700">$399.99</p>
+              <a href="#" class="mt-2 inline-block bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Add to Cart</a>
+            </div>
+          </div>
+
+
+          <div class="card border rounded-md overflow-hidden shadow-md" style="width: 18rem;" data-rating="4" data-category="electronics">
+            <img src="box4_image.jpg" class="w-full object-cover" class="card-image">
+            <div class="p-4">
+              <h5 class="text-lg font-semibold">Electronics</h5>
+              <p>Rating: <span id="Rating">4</span>/5</p>
+              <p class="text-gray-700">$399.99</p>
+              <a href="#" class="mt-2 inline-block bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Add to Cart</a>
+            </div>
+          </div>
+
+
+          <div class="card border rounded-md overflow-hidden shadow-md" style="width: 18rem;" data-rating="5" data-category="beauty">
+            <img src="box5_image.jpg" class="w-full object-cover" class="card-image">
+            <div class="p-4">
+              <h5 class="text-lg font-semibold">Beauty</h5>
+              <p>Rating: <span id="Rating">5</span>/5</p>
+              <p class="text-gray-700">$399.99</p>
+              <a href="#" class="mt-2 inline-block bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Add to Cart</a>
+            </div>
+          </div>
+
+
+          <div class="card border rounded-md overflow-hidden shadow-md" style="width: 18rem;" data-rating="4" data-category="others">
+            <img src="box6_image.jpg" class="w-full object-cover" class="card-image">
+            <div class="p-4">
+              <h5 class="text-lg font-semibold">Pets Food</h5>
+              <p>Rating: <span id="Rating">4</span>/5</p>
+              <p class="text-gray-700">$399.99</p>
+              <a href="#" class="mt-2 inline-block bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Add to Cart</a>
+            </div>
+          </div>
+
+
+
+          <div class="card border rounded-md overflow-hidden shadow-md" style="width: 18rem;" data-rating="5" data-category="others">
+            <img src="box7_image.jpg" class="w-full object-cover" class="card-image">
+            <div class="p-4">
+              <h5 class="text-lg font-semibold">Daily Needs</h5>
+              <p>Rating: <span id="Rating">5</span>/5</p>
+              <p class="text-gray-700">$399.99</p>
+              <a href="#" class="mt-2 inline-block bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Add to Cart</a>
+            </div>
+          </div>
+
+
+
+          <div class="card border rounded-md overflow-hidden shadow-md" style="width: 18rem;" data-rating="4" data-category="clothing">
+            <img src="box8_image.jpg" class="w-full object-cover" class="card-image">
+            <div class="p-4">
+              <h5 class="text-lg font-semibold">Clothing</h5>
+              <p>Rating: <span id="Rating">4</span>/5</p>
+              <p class="text-gray-700">$399.99</p>
+              <a href="#" class="mt-2 inline-block bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Add to Cart</a>
+            </div>
+          </div>
+
+
+
+          <div class="card border rounded-md overflow-hidden shadow-md" style="width: 18rem;" data-rating="3" data-category="others">
+            <img src="images.jpeg" class="w-full object-cover" class="card-image">
+            <div class="p-4">
+              <h5 class="text-lg font-semibold">Daily Needs</h5>
+              <p>Rating: <span id="Rating">3</span>/5</p>
+              <p class="text-gray-700">$399.99</p>
+              <a href="#" class="mt-2 inline-block bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Add to Cart</a>
+            </div>
+          </div>
+
+
+          
+
+          
+        </div>
+      </div>
+      <script src="script.js"></script>
+    </body>
+    </html>
